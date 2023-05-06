@@ -32,7 +32,6 @@ export default class AuthUserSessionStorageSingletonCoreService implements AuthU
   }
 
   saveWithoutSyncCurrnetUser(userAuthenticated: UserAuthenticated) {
-    console.log("save user to storage")
     try {
       sessionStorage.setItem(this._sessionStorageItemName, JSON.stringify(userAuthenticated))
     }
@@ -43,6 +42,9 @@ export default class AuthUserSessionStorageSingletonCoreService implements AuthU
 
   get() {
     try {
+      if(this._syncronizedCurrentUser){
+        return this._currentUserAuthenticated
+      }
       const gettingUser = this.getWithoutSyncCurrentUser()
       this.defineCurrentUser(gettingUser)
       return gettingUser

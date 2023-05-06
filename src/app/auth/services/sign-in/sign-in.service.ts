@@ -5,23 +5,23 @@ import { SignInApiResponse } from 'src/core/auth/interfaces/api/auth';
 import SignInRepository, { SignInResponse } from 'src/core/auth/repositories/SignInRepository';
 import { environment } from 'src/environments/environment';
 import UserAuthenticated from 'src/core/auth/entities/UserAuthenticated';
-import AuthUserSessionStorageSingletonCoreService from 'src/core/auth/services/AuthUserSessionStorageSingletonCoreService';
+import { AuthUserSessionStorageService } from 'src/app/services/auth-user-session-storage/auth-user-session-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SignInService implements SignInRepository {
   private apiUrl = environment.apiUrl;
-  private authUserSessionStorageSingletonCoreService = AuthUserSessionStorageSingletonCoreService.getInstance()
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authUserSessionStorageService: AuthUserSessionStorageService) { }
 
   execute(login: string, password: string, stayLogged: boolean): Observable<SignInResponse> {
     const bodyRequest = { login, password }
+
     return this.http.post<SignInApiResponse>(this.apiUrl, bodyRequest, { responseType: 'json' }).pipe(
       //TODO update with good API response
       map((response): SignInResponse => ({ echec: false, message: "created with success", user: { token: "SDdFCcSDQCeeeNECEE6fz46efze6f4e84f8zzeizflnSDF" } })),
       tap((signInResponse) => {
-        this.authUserSessionStorageSingletonCoreService.save(new UserAuthenticated(signInResponse.user.token))
+        this.authUserSessionStorageService.authUserSessionStorageSingletonCoreService.save(new UserAuthenticated(signInResponse.user.token))
       }),
       catchError(this.handleError)
     )
