@@ -1,11 +1,15 @@
-import AuthUserStorageRepository from "../auth/repositories/AuthUserStorageRepository";
+import AuthUserSessionStorageSingletonRepository from "../auth/repositories/AuthUserSessionStorageSingletonRepository";
+
 
 export default class AuthPermissionCoreService{
-  constructor (private authUserStorageRepository: AuthUserStorageRepository){}
+  private _authUserStorageRepository: AuthUserSessionStorageSingletonRepository;
+  constructor (authUserStorageRepository: AuthUserSessionStorageSingletonRepository){
+    this._authUserStorageRepository = authUserStorageRepository
+  }
 
   checkAuthenticated(){
     try{
-      return this.authUserStorageRepository.getAndDefineCurrentUser() ? true : false
+      return this._authUserStorageRepository.haveCurrentUser ? true : false
     }
     catch{
       return false

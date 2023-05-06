@@ -33,5 +33,5 @@
     </div>
   </div>
 
-  <button [disabled]="!signInForm.form.valid" type="submit" class="submit-button">Connexion</button>
+  <button [disabled]="!signInForm.form.valid || signInViewModel.loading" type="submit" class="submit-button">Connexion</button>
 </form>

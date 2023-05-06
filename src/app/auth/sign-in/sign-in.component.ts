@@ -24,7 +24,7 @@ export class SignInComponent {
     if(this.signInForm?.valid){
       this.signInViewModel.submit(this.credentials.login, this.credentials.password).subscribe({
         next: (value)=> {
-          console.log("response", value)
+          console.log("ready to redirect")
           this.router.navigate(["space"])
         },
         error:error=>{

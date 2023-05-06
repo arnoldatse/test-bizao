@@ -1,4 +1,4 @@
-import AuthUserStorageRepository from "../repositories/AuthUserStorageRepository";
+import AuthUserStorageRepository from "../repositories/AuthUserSessionStorageSingletonRepository";
 
 export default class DisconectUserUseCase {
   constructor (private authUserStorageRepository: AuthUserStorageRepository){}
