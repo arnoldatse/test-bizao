@@ -23,7 +23,7 @@ export default class AuthUserSessionStorageSingletonCoreService implements AuthU
     try {
       this.saveWithoutSyncCurrnetUser(userAuthenticated)
 
-      this.defineCurrentUser(this.defineUser(userAuthenticated.token))
+      this.defineCurrentUser(this.defineUserAuthenticated(userAuthenticated.token))
       return this.currentUserAuthenticated
     }
     catch {
@@ -61,7 +61,7 @@ export default class AuthUserSessionStorageSingletonCoreService implements AuthU
       if (sessionStorageResponse) {
         const sessionStorageJsonResponse = JSON.parse(sessionStorageResponse) as UserAuthenticated
 
-        return this.defineUser(sessionStorageJsonResponse.token)
+        return this.defineUserAuthenticated(sessionStorageJsonResponse.token)
       }
       throw standardError
     }
@@ -80,7 +80,7 @@ export default class AuthUserSessionStorageSingletonCoreService implements AuthU
     }
   }
 
-  private defineUser(token: string) {
+  private defineUserAuthenticated(token: string) {
     return new UserAuthenticated(token)
   }
 
@@ -91,16 +91,33 @@ export default class AuthUserSessionStorageSingletonCoreService implements AuthU
   }
 
   private resetCurrentUser() {
-    this._haveCurrentUser = false
     this._currentUserAuthenticated = this._emptyUserAuthenticated
+    this._haveCurrentUser = false
+    this._syncronizedCurrentUser = true
   }
 
   get currentUserAuthenticated() {
-    return this._syncronizedCurrentUser ? this._currentUserAuthenticated : this.get()
+    let currentUserAuthenticatedToReturn = this._emptyUserAuthenticated
+    if(this._syncronizedCurrentUser){
+      currentUserAuthenticatedToReturn = this._currentUserAuthenticated
+    }
+    else{
+      try{
+        currentUserAuthenticatedToReturn = this.get()
+      }
+      catch{}
+    }
+
+    return currentUserAuthenticatedToReturn
   }
 
   get haveCurrentUser() {
-    if (!this._syncronizedCurrentUser) this.get()
+    if (!this._syncronizedCurrentUser){
+      try{
+        this.get()
+      }
+      catch{}
+    }
     return this._haveCurrentUser
   }
 

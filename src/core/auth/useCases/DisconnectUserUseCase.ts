@@ -1,10 +1,10 @@
-import AuthUserStorageRepository from "../repositories/AuthUserSessionStorageSingletonRepository";
+import AuthUserSessionStorageSingletonRepository from "../repositories/AuthUserSessionStorageSingletonRepository";
 
 export default class DisconectUserUseCase {
-  constructor (private authUserStorageRepository: AuthUserStorageRepository){}
+  constructor (private authUserSessionStorageSingletonRepository: AuthUserSessionStorageSingletonRepository){}
   execute() {
     try{
-      this.authUserStorageRepository.remove()
+      this.authUserSessionStorageSingletonRepository.remove()
     }
     catch{
       throw new Error("Fail to disconnect user")

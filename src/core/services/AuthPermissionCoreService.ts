@@ -9,7 +9,7 @@ export default class AuthPermissionCoreService{
 
   checkAuthenticated(){
     try{
-      return this._authUserStorageRepository.haveCurrentUser ? true : false
+      return this._authUserStorageRepository.haveCurrentUser
     }
     catch{
       return false
