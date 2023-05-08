@@ -31,6 +31,10 @@ export default class SignInViewModel {
     this._error = {status: true, message}
   }
 
+  removeError(){
+    this._error = {status:false, message:""}
+  }
+
   get error(){
     return this._error.status
   }

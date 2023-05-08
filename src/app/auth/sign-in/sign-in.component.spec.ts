@@ -26,10 +26,6 @@ describe('SignInComponent', () => {
     fixture.whenStable().then(async () => {
       const loginElement: HTMLInputElement = fixture.debugElement.nativeElement.querySelector('#sign-in-login')
       const passwordElement: HTMLInputElement = fixture.debugElement.nativeElement.querySelector('#sign-in-password')
-      /* const submitButton: HTMLButtonElement = fixture.debugElement.nativeElement.querySelector('#sign-in-submit-button')
-
-      console.log('button submit 1', submitButton)
-      console.log('button submit 1', submitButton) */
 
       loginElement.dispatchEvent(new Event('focus'))
       loginElement.dispatchEvent(new Event('blur'))
@@ -42,9 +38,6 @@ describe('SignInComponent', () => {
         const loginError: HTMLDivElement = fixture.debugElement.nativeElement.querySelector("#sign-in-login-error")
         const passwordError: HTMLDivElement = fixture.debugElement.nativeElement.querySelector("#sign-in-password-error")
         const submitButton: HTMLButtonElement = fixture.debugElement.nativeElement.querySelector('#sign-in-submit-button')
-
-        console.log('button submit', submitButton)
-        console.log('instance', fixture.componentInstance)
 
         expect(loginError.hidden).toBeFalsy
         expect(passwordError.hidden).toBeFalsy
