@@ -17,11 +17,20 @@ export class SignInService implements SignInRepository {
   execute(login: string, password: string, stayLogged: boolean): Observable<SignInResponse> {
     const bodyRequest = { login, password }
 
+    return of<SignInApiResponse>({}).pipe(
+      //TODO update with good API response
+      map((response): SignInResponse => ({ echec: false, message: "created with success", user: { token: "SDdFCcSDQCeeeNECEE6fz46efze6f4e84f8zzeizflnSDF" } })),
+      tap((signInResponse) => {
+        this.authUserSessionStorageService.authUserSessionStorageSingletonService.save(new UserAuthenticated(signInResponse.user.token))
+      }),
+      catchError(this.handleError)
+    )
+
     return this.http.post<SignInApiResponse>(this.apiUrl, bodyRequest, { responseType: 'json' }).pipe(
       //TODO update with good API response
       map((response): SignInResponse => ({ echec: false, message: "created with success", user: { token: "SDdFCcSDQCeeeNECEE6fz46efze6f4e84f8zzeizflnSDF" } })),
       tap((signInResponse) => {
-        this.authUserSessionStorageService.authUserSessionStorageSingletonCoreService.save(new UserAuthenticated(signInResponse.user.token))
+        this.authUserSessionStorageService.authUserSessionStorageSingletonService.save(new UserAuthenticated(signInResponse.user.token))
       }),
       catchError(this.handleError)
     )

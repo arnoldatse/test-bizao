@@ -5,6 +5,6 @@ import AuthUserSessionStorageSingletonCoreService from 'src/core/auth/services/A
   providedIn: 'root'
 })
 export class AuthUserSessionStorageService {
-  authUserSessionStorageSingletonCoreService = AuthUserSessionStorageSingletonCoreService.getInstance()
+  authUserSessionStorageSingletonService = AuthUserSessionStorageSingletonCoreService.getInstance()
   constructor() { }
 }

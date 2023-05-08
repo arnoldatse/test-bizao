@@ -1,1 +1,79 @@
 /* You can add global styles to this file, and also import other style files */
+$primaryColor: #180072;
+$primaryContrastColor: #100147;
+
+$secondaryStartGradientColor: #EB011B;
+$secondaryEndGradientColor: #F79C1B;
+$secondaryGradientColor: linear-gradient(130deg, $secondaryStartGradientColor 0%, $secondaryEndGradientColor 80%);
+
+$accentStartGradientColor: #a10013;
+$accentEndGradientColor: #8e5a10;
+$accentGradientColor: linear-gradient(130deg, $accentStartGradientColor 0%, $accentEndGradientColor 80%);
+
+$inactiveGradientColor: linear-gradient(130deg, #515151 0%, #afafaf 80%);
+
+$dangerColor: #f53737;
+$fieldMargin: 5px;
+$interactorBorderRadius: 5px;
+
+.field{
+  label{
+    display: block;
+  }
+  .field-error{
+    color: $dangerColor;
+    font-size: 0.8rem;
+  }
+  margin: calc($fieldMargin * 2) 0;
+}
+.form-control{
+  &.ng-invalid.ng-dirty{
+    border-color: $dangerColor;
+  }
+  box-sizing: border-box;
+  height: 35px;
+  border: 1px solid #b5b5b5;
+  border-radius: $interactorBorderRadius;
+  padding: 5px 10px;
+  margin: $fieldMargin 0;
+}
+.form-control:focus{
+  &.ng-invalid.ng-dirty{
+    border-color: $dangerColor;
+  }
+  outline: none;
+  border: 2px solid $primaryColor;
+}
+
+.btn{
+  cursor: pointer;
+  color: #ffffff;
+  background-image: $secondaryGradientColor;
+  padding: 10px;
+  border: none;
+  border-radius: $interactorBorderRadius;
+}
+.btn:hover{
+  cursor: pointer;
+  color: #d1d1d1;
+  background-image: $accentGradientColor;
+  padding: 10px;
+}
+.btn:disabled{
+  cursor: auto;
+  color: #dfdfdf;
+  background-image: $inactiveGradientColor;
+}
+
+.full-width{
+  width: 100%;
+}
+
+.form-error-message{
+  margin: 20px 0;
+  padding: 20px;
+  width: 100%;
+  border-radius: $interactorBorderRadius;
+  background-color: $dangerColor;
+  color: #fff;
+}

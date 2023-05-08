@@ -1,0 +1,14 @@
+.top-bar {
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  height: 70px;
+  width: 100%;
+  padding: 0px 30px;
+  box-shadow: 1px 2px 9px -1px rgba(143, 143, 143, 0.75);
+  -webkit-box-shadow: 1px 2px 9px -1px rgba(143, 143, 143, 0.75);
+  -moz-box-shadow: 1px 2px 9px -1px rgba(143, 143, 143, 0.75);
+}

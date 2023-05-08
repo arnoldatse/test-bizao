@@ -21,7 +21,7 @@ export default class AuthUserSessionStorageSingletonCoreService implements AuthU
 
   save(userAuthenticated: UserAuthenticated) {
     try {
-      this.saveWithoutSyncCurrnetUser(userAuthenticated)
+      this.saveWithoutSyncCurrentUser(userAuthenticated)
 
       this.defineCurrentUser(this.defineUserAuthenticated(userAuthenticated.token))
       return this.currentUserAuthenticated
@@ -31,7 +31,7 @@ export default class AuthUserSessionStorageSingletonCoreService implements AuthU
     }
   }
 
-  saveWithoutSyncCurrnetUser(userAuthenticated: UserAuthenticated) {
+  saveWithoutSyncCurrentUser(userAuthenticated: UserAuthenticated) {
     try {
       sessionStorage.setItem(this._sessionStorageItemName, JSON.stringify(userAuthenticated))
     }

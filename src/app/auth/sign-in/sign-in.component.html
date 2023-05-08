@@ -1,37 +1,60 @@
-<form (ngSubmit)="submit()" #signInForm="ngForm">
-  <div *ngIf="signInViewModel.error" class="error-message">
-    {{ signInViewModel.errorMessage }}
+<div class="sign-in-container">
+  <div class="sign-in-content">
+    <form (ngSubmit)="submit()" #signInForm="ngForm" autocomplete="off">
+      <div class="logo">
+        <img src="assets/pictures/logo.svg" width="150px" alt="Logo" />
+      </div>
+      <div *ngIf="signInViewModel.error" class="form-error-message">
+        {{ signInViewModel.errorMessage }}
+      </div>
+      <div class="field full-width">
+        <label for="sign-in-login">Login</label>
+        <input
+          type="text"
+          class="form-control full-width"
+          id="sign-in-login"
+          required
+          [(ngModel)]="credentials.login"
+          name="login"
+          #login="ngModel"
+        />
+        <div
+          class="field-error"
+          id="sign-in-login-error"
+          [hidden]="login.valid || login.pristine"
+        >
+          Login is required
+        </div>
+      </div>
+      <div class="field">
+        <label for="sign-in-password">Password</label>
+        <input
+          type="text"
+          class="form-control full-width"
+          id="sign-in-password"
+          required
+          [(ngModel)]="credentials.password"
+          name="password"
+          #password="ngModel"
+        />
+        <div
+          class="field-error"
+          id="sign-in-password-error"
+          [hidden]="password.valid || password.pristine"
+        >
+          Password is required
+        </div>
+      </div>
+      <div class="action">
+        <button
+          id="sign-in-submit-button"
+          [disabled]="!signInForm.form.valid || signInViewModel.loading"
+          type="submit"
+          class="btn full-width"
+        >
+          Connexion
+        </button>
+      </div>
+    </form>
   </div>
-  <div class="field">
-    <label for="login">Login</label>
-    <input
-      type="text"
-      class="form-control"
-      id="login"
-      required
-      [(ngModel)]="credentials.login"
-      name="login"
-      #login="ngModel"
-    />
-    <div [hidden]="login.valid || login.pristine" class="alert alert-danger">
-      Login is required
-    </div>
-  </div>
-  <div class="field">
-    <label for="password">Password</label>
-    <input
-      type="text"
-      class="form-control"
-      id="password"
-      required
-      [(ngModel)]="credentials.password"
-      name="password"
-      #password="ngModel"
-    />
-    <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
-      Password is required
-    </div>
-  </div>
-
-  <button [disabled]="!signInForm.form.valid || signInViewModel.loading" type="submit" class="submit-button">Connexion</button>
-</form>
+</div>

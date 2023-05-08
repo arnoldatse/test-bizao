@@ -1,4 +1,4 @@
-import AuthUserSessionStorageSingletonRepository from "../auth/repositories/AuthUserSessionStorageSingletonRepository";
+import AuthUserSessionStorageSingletonRepository from "../repositories/AuthUserSessionStorageSingletonRepository";
 
 
 export default class AuthPermissionCoreService{

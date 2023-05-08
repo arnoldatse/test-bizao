@@ -1,0 +1,27 @@
+.sign-in-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  .sign-in-content {
+    width: 450px;
+    padding: 40px;
+    height: fit-content;
+    border-radius: 20px;
+    border: 1px solid #c2c2c2;
+    box-shadow: 1px 0px 12px 0px rgba(143, 143, 143, 0.75);
+    -webkit-box-shadow: 1px 0px 12px 0px rgba(143, 143, 143, 0.75);
+    -moz-box-shadow: 1px 0px 12px 0px rgba(143, 143, 143, 0.75);
+
+    .logo{
+      display: flex;
+      justify-content: center;
+    }
+    .action{
+      margin-top: 15px;
+    }
+  }
+}

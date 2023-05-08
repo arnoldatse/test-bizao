@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent {
-  @ViewChild("signInForm")  signInForm: NgForm|null = null;
+  @ViewChild("signInForm")  signInForm!: NgForm;
 
   signInViewModel: SignInViewModel;
   credentials = new LoginCredentials("", "")
