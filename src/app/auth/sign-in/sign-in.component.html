@@ -21,7 +21,7 @@
         <div
           class="field-error"
           id="sign-in-login-error"
-          [hidden]="login.valid || login.pristine"
+          *ngIf="login.valid || login.pristine"
         >
           Login is required
         </div>
@@ -40,7 +40,7 @@
         <div
           class="field-error"
           id="sign-in-password-error"
-          [hidden]="password.valid || password.pristine"
+          *ngIf="password.valid || password.pristine"
         >
           Password is required
         </div>

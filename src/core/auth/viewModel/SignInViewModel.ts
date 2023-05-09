@@ -1,4 +1,4 @@
-import { Observable } from "rxjs";
+import { Observable, tap } from "rxjs";
 import SignInUseCase from "../useCases/SignInUseCase";
 import SignInRepository, { SignInResponse } from "../repositories/SignInRepository";
 
@@ -12,7 +12,11 @@ export default class SignInViewModel {
   }
 
   submit(login: string, password: string, stayLogged: boolean = false): Observable<SignInResponse>{
-    return this._signInUseCase.execute(login, password, stayLogged);
+    this.removeError()
+    this.startLoading()
+    return this._signInUseCase.execute(login, password, stayLogged).pipe(
+      tap(this.stopLoading.bind(this))
+    );
   }
 
   startLoading(){

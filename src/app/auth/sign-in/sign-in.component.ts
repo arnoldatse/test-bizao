@@ -22,7 +22,6 @@ export class SignInComponent {
 
   submit(){
     if(this.signInForm?.valid){
-      this.signInViewModel.removeError()
       this.signInViewModel.submit(this.credentials.login, this.credentials.password).subscribe({
         next: (value)=> {
           this.router.navigate(["space"])
