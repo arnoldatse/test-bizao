@@ -39,7 +39,7 @@ describe("Test AuthUserSessionStorageSingletonCoreService", () => {
     AuthUserSessionStorageSingletonCoreService.getInstance().remove()
   })
 
-  test("Test if only one instance for all getting instance", () => {
+  test("Test should have only one instance for all getting instance", () => {
     const userAUthenticated = new UserAuthenticated("12345")
 
     const authUserSessionStorageSingletonCoreServiceOne: AuthUserSessionStorageSingletonRepository = AuthUserSessionStorageSingletonCoreService.getInstance()
@@ -50,23 +50,21 @@ describe("Test AuthUserSessionStorageSingletonCoreService", () => {
     expect(authUserSessionStorageSingletonCoreServiceOne.currentUserAuthenticated).toEqual(authUserSessionStorageSingletonCoreServiceTwo.currentUserAuthenticated)
   })
 
-  test("Test current user defined equal to saved current user", ()=>{
+  test("Test current user defined should equal to sessionStorage saved datas", ()=>{
     const userAUthenticated = new UserAuthenticated("12345")
     const authUserSessionStorageSingletonCoreService: AuthUserSessionStorageSingletonRepository = AuthUserSessionStorageSingletonCoreService.getInstance()
-
-    console.log(authUserSessionStorageSingletonCoreService.haveCurrentUser)
-    console.log(authUserSessionStorageSingletonCoreService.currentUserAuthenticated)
 
     expect(authUserSessionStorageSingletonCoreService.haveCurrentUser).toBeFalsy()
     expect(authUserSessionStorageSingletonCoreService.currentUserAuthenticated).toEqual(new UserAuthenticated(""))
 
     authUserSessionStorageSingletonCoreService.save(userAUthenticated);
     expect(authUserSessionStorageSingletonCoreService.get()).toEqual(userAUthenticated)
+
     expect(authUserSessionStorageSingletonCoreService.currentUserAuthenticated).toEqual(userAUthenticated)
     expect(authUserSessionStorageSingletonCoreService.haveCurrentUser).toBeTruthy()
   })
 
-  test("Test session storage is called only one time except for save() and remove() method", () => {
+  test("Test sessionStorage should be called only one time except for save() and remove() method", () => {
     const spySessionStorageSetItem = jest.spyOn(window.sessionStorage, "setItem")
     const spySessionStorageGetItem = jest.spyOn(window.sessionStorage, "getItem")
     const spySessionStorageRemoveItem = jest.spyOn(window.sessionStorage, "removeItem")
