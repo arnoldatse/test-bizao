@@ -42,7 +42,7 @@ export default class AuthUserSessionStorageSingletonCoreService implements AuthU
 
   get() {
     try {
-      if(this._syncronizedCurrentUser){
+      if (this._syncronizedCurrentUser) {
         return this._currentUserAuthenticated
       }
       const gettingUser = this.getWithoutSyncCurrentUser()
@@ -60,8 +60,10 @@ export default class AuthUserSessionStorageSingletonCoreService implements AuthU
       const sessionStorageResponse = sessionStorage.getItem(this._sessionStorageItemName)
       if (sessionStorageResponse) {
         const sessionStorageJsonResponse = JSON.parse(sessionStorageResponse) as UserAuthenticated
-
-        return this.defineUserAuthenticated(sessionStorageJsonResponse.token)
+        if (sessionStorageJsonResponse) {
+          return this.defineUserAuthenticated(sessionStorageJsonResponse.token)
+        }
+        throw standardError
       }
       throw standardError
     }
@@ -98,25 +100,25 @@ export default class AuthUserSessionStorageSingletonCoreService implements AuthU
 
   get currentUserAuthenticated() {
     let currentUserAuthenticatedToReturn = this._emptyUserAuthenticated
-    if(this._syncronizedCurrentUser){
+    if (this._syncronizedCurrentUser) {
       currentUserAuthenticatedToReturn = this._currentUserAuthenticated
     }
-    else{
-      try{
+    else {
+      try {
         currentUserAuthenticatedToReturn = this.get()
       }
-      catch{}
+      catch { }
     }
 
     return currentUserAuthenticatedToReturn
   }
 
   get haveCurrentUser() {
-    if (!this._syncronizedCurrentUser){
-      try{
+    if (!this._syncronizedCurrentUser) {
+      try {
         this.get()
       }
-      catch{}
+      catch { }
     }
     return this._haveCurrentUser
   }
