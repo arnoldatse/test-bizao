@@ -1,4 +1,4 @@
-import { Observable, tap } from "rxjs";
+import { Observable, catchError, tap, throwError } from "rxjs";
 import SignInUseCase from "../useCases/SignInUseCase";
 import SignInRepository, { SignInResponse } from "../repositories/SignInRepository";
 
@@ -15,7 +15,12 @@ export default class SignInViewModel {
     this.removeError()
     this.startLoading()
     return this._signInUseCase.execute(login, password, stayLogged).pipe(
-      tap(this.stopLoading.bind(this))
+      tap(this.stopLoading.bind(this)),
+      catchError((error)=>{
+        this.stopLoading()
+        this.setError(error);
+        return throwError(()=>new Error(error))
+      })
     );
   }
 
@@ -24,7 +29,7 @@ export default class SignInViewModel {
   }
 
   stopLoading(){
-    this._loading = true
+    this._loading = false
   }
 
   toggleLoading(){

@@ -25,9 +25,6 @@ export class SignInComponent {
       this.signInViewModel.submit(this.credentials.login, this.credentials.password).subscribe({
         next: (value)=> {
           this.router.navigate(["space"])
-        },
-        error:error=>{
-          this.signInViewModel.setError(error)
         }
       })
     }
