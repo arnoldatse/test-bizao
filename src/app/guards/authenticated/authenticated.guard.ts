@@ -7,5 +7,5 @@ export const authenticatedGuard: CanActivateFn = (route, state) => {
   const router = inject(Router)
   const authUserSessionStorageService = inject(AuthUserSessionStorageService)
   const authPermissionCoreService = new AuthPermissionCoreService(authUserSessionStorageService.authUserSessionStorageSingletonService)
-  return authPermissionCoreService.checkAuthenticated() ? true : router.navigate(["/auth/login"]);
+  return authPermissionCoreService.checkAuthenticated() ? true : router.navigate(["/auth", "login"]);
 };
